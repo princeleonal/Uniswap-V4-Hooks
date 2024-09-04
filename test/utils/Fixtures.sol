@@ -24,6 +24,7 @@ contract Fixtures is Deployers, DeployPermit2 {
 
     IPositionManager posm;
     IAllowanceTransfer permit2;
+    
 
     function deployAndApprovePosm(IPoolManager poolManager) public {
         deployPosm(poolManager);
@@ -34,6 +35,7 @@ contract Fixtures is Deployers, DeployPermit2 {
         // We use deployPermit2() to prevent having to use via-ir in this repository.
         permit2 = IAllowanceTransfer(deployPermit2());
         posm = IPositionManager(new PositionManager(poolManager, permit2));
+
     }
 
     function seedBalance(address to) internal {
@@ -52,6 +54,7 @@ contract Fixtures is Deployers, DeployPermit2 {
         IERC20(Currency.unwrap(currency)).approve(address(permit2), type(uint256).max);
         // 2. Then, the caller must approve POSM as a spender of permit2. TODO: This could also be a signature.
         permit2.approve(Currency.unwrap(currency), address(posm), type(uint160).max, type(uint48).max);
+
     }
 
     // Does the same approvals as approvePosm, but for a specific address.

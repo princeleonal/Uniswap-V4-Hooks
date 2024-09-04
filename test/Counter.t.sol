@@ -60,6 +60,7 @@ contract CounterTest is Test, Fixtures {
             tickLower: TickMath.minUsableTick(key.tickSpacing),
             tickUpper: TickMath.maxUsableTick(key.tickSpacing)
         });
+        /// mint is defined in easyposm.sol 
         (tokenId,) = posm.mint(
             config,
             10_000e18,
@@ -70,7 +71,9 @@ contract CounterTest is Test, Fixtures {
             ZERO_BYTES
         );
     }
-
+    function test_SwapHooks()external{
+        
+    }
     function testCounterHooks() public {
         // positions were created in setup()
         assertEq(hook.beforeAddLiquidityCount(poolId), 1);
